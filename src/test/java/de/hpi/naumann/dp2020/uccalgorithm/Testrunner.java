@@ -48,7 +48,7 @@ public class Testrunner {
 
 			List<Result> results = resultReceiver.fetchNewResults();
 			ClassLoader classLoader = getClass().getClassLoader();
-			Path targetPath = Paths.get(classLoader.getResource("gold/" + dataset.name()).getFile());
+			Path targetPath = Paths.get(classLoader.getResource("gold/" + dataset.name()).toURI());
 			if (!Files.exists(targetPath)) {
 				throw new FileNotFoundException("Could not find gold standard for " + dataset.name());
 			}

@@ -1,6 +1,7 @@
 package de.hpi.naumann.dp2020.uccalgorithm;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 import de.metanome.algorithm_integration.AlgorithmConfigurationException;
@@ -31,10 +32,10 @@ public enum Dataset {
 		this.inputFileHasHeader = hasHeader;
 	}
 
-	public ConfigurationSettingFileInput getConfigSetting() throws AlgorithmConfigurationException {
+	public ConfigurationSettingFileInput getConfigSetting() throws AlgorithmConfigurationException, URISyntaxException {
 		String filename = inputFolderPath + inputDatasetName + inputFileEnding;
 		ClassLoader classLoader = getClass().getClassLoader();
-		String file = Paths.get(classLoader.getResource(filename).getFile()).toAbsolutePath().toString();
+		String file = Paths.get(classLoader.getResource(filename).toURI()).toAbsolutePath().toString();
 
 		return new ConfigurationSettingFileInput(file, true, inputFileSeparator, inputFileQuotechar, inputFileEscape,
 				inputFileStrictQuotes, inputFileIgnoreLeadingWhiteSpace, inputFileSkipLines, inputFileHasHeader,
